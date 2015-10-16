@@ -1,0 +1,198 @@
+extends ../_layout_auth
+include ../mixins/pagination
+
+block body
+  h2.m-bottom-6 活動設定
+  .well.control-well.p-30.m-bottom-8
+    form#shopDiscount.form-horizontal(action="/admin/shopDiscount/create", method="post")
+      input.form-control(type='hidden',name='id',form='shopDiscount' value= query.id)
+      .form-group
+        label.col-sm-3.col-md-2.control-label 活動名稱
+        .col-sm-9.col-md-10
+          input.form-control(type='text',name='title',form='shopDiscount' value= promotion.title)
+        // /col-sm-10
+      // /form-group
+      .form-group
+        label.col-sm-3.col-md-2.control-label 活動類型
+        .col-sm-4.col-md-3
+          .radio
+            label
+              -if( promotion.type=='flash' )
+                input(type='radio', name='type', value='flash', checked='',form='shopDiscount')
+              -else
+                input(type='radio', name='type', value='flash',form='shopDiscount')
+              | 閃購
+        .col-sm-1.col-md-1
+        .col-sm-4.col-md-3
+          .radio
+            label
+              -if( promotion.type=='general' )
+                input(type='radio', name='type', value='general', checked='',form='shopDiscount') 
+              -else
+                input(type='radio', name='type', value='general',form='shopDiscount') 
+              | 一般
+      // /form-group
+      .form-group
+        label.col-sm-3.col-md-2.control-label 活動主圖
+        .col-sm-9.col-md-10
+          .max-width-150
+
+            .fileinput.fileinput-new(data-provides='fileinput')
+              .fileinput-new.fileinput-square
+                img.img-full(src='http://fakeimg.pl/150x150/dddddd/FFF/?text=cover')
+              // /fileinput-new
+              .fileinput-preview.fileinput-exists.border-block-1
+              // /fileinput-preview
+              .fileinput-btn
+                span.btn.btn-default.btn-sm.btn-file
+                  span.fileinput-new Select image
+                  span.fileinput-exists Change
+                  input.fileInput(type='file', name="uploadfile", data-name='coverPhoto[]')
+                  input(type='hidden', name="filename", value='coverPhoto[]')
+                  input(type='hidden', name="width", value='150')
+                  input(type='hidden', name="height", value='150')
+                  input(type='hidden', name='coverPhoto[]', form='goodForm', value='')
+                a.btn.btn-default.btn-sm.fileinput-exists(href='#', data-dismiss='fileinput') Remove
+
+            //
+              fileinput-img-square
+              ==================================================
+            //      
+              .fileinput-btn
+                span.btn.btn-default.btn-sm.btn-file
+                  span.fileinput-new Select image
+                  span.fileinput-exists Change
+                  input(type='file', name='...', form='shopDiscount')
+                a.btn.btn-default.btn-sm.fileinput-exists(href='#', data-dismiss='fileinput') Remove
+              // /fileinput-btn
+            // /fileinput
+          // /max-width-150
+          a(href='#', data-toggle='tooltip', title='', data-original-title='商品圖長寬 600x600 像素，限 JPG/GIF 格式，檔案大小 500KB 以下')
+            span.glyphicon.glyphicon-info
+        // /col-sm-10
+      // /form-group
+      .form-group
+        label.col-sm-3.col-md-2.control-label 活動時間
+        .col-sm-4.col-md-3
+          input.form-control(type='date',name='startDate',form='shopDiscount',value= sails.moment(promotion.startDate).format('YYYY-MM-DD'))
+        .col-sm-1.col-md-1.p-left-0.p-right-0.text-center
+          p.form-control-static 至
+        .col-sm-4.col-md-3
+          input.form-control(type='date',name='endDate',form='shopDiscount',value= sails.moment(promotion.endDate).format('YYYY-MM-DD'))
+        .col-sm-9.col-sm-offset-3.col-md-3.col-md-offset-0
+          .checkbox
+            label
+              input(type='checkbox')
+              |  不限時
+      // /form-group
+      .form-group
+        label.col-sm-3.col-md-2.control-label 折扣設定
+        .col-sm-4.col-md-3
+          .radio
+            label
+              -if( promotion.discountType=='price' )
+                input#optionsRadios1(type='radio', name='discountType', value='price', checked='',form='shopDiscount')
+              -else
+                input#optionsRadios1(type='radio', name='discountType', value='price',form='shopDiscount')
+              input.form-control(type='text',name='price', placeholder='請輸入折扣金額',form='shopDiscount',value= promotion.price)
+        .col-sm-1.col-md-1
+        .col-sm-4.col-md-3
+          .radio
+            label
+              -if( promotion.discountType=='discount' )
+                input#optionsRadios2(type='radio', name='discountType', value='discount', checked='',form='shopDiscount')
+              -else
+                input#optionsRadios2(type='radio', name='discountType', value='discount',form='shopDiscount')
+              .input-group.width-12
+                input.form-control(type='text',name='discount',form='shopDiscount',value= promotion.discount)
+                span.input-group-addon 折
+              // /input-group
+      // /form-group
+      .form-group
+        label.col-sm-3.col-md-2.control-label 活動文案
+        .col-sm-9.col-md-10
+          textarea.form-control(rows='3',form='shopDiscount',name='description') #{promotion.description}
+        // /col-sm-9
+      // /form-group
+      .m-top-6.text-right
+        a.btn.btn-link.delete-link.btn-lg(href='shop-discount') 取消
+        button#add.btn.btn-green.btn-lg(form='shopDiscount') 確認
+      // /text-right
+  // /well
+  .row
+    .col-md-4
+      form.form-inline
+        .form-group
+          label 顯示
+            +pagination-limit
+        // /form-group
+    // /col-md-6
+    .col-md-8.desktop-text-right
+      form#search.form-inline.with-pagination(name="search", action="shop-discount-detail", method="get")
+        .form-group.m-right-2
+          label 品牌名稱
+          select.form-control
+            option 品牌名稱
+            option 2
+            option 3
+            option 4
+            option 5
+        // /form-group
+        .form-group.m-right-2
+          .input-group
+            input#keyword.form-control(type='text',name="keyword",form='search',placeholder='輸入關鍵字',value= query.keyword)
+            +pagination-fields(page, limit)
+            span.input-group-btn
+              button.btn.btn-default.p-left-2.p-right-2(type='button', onClick='$("form[name=\'search\']").submit()')
+                span.glyphicon.glyphicon-search
+    // /col-md-6
+  // /row
+  hr.dashed-line
+  table.table.table-striped
+    thead
+      tr
+        th
+          input(type='checkbox')
+        th 主圖
+        th
+          | 商品名稱
+          span.caret
+        th
+          | 貨號
+          span.caret
+        th
+          | 售價
+          span.caret
+        th
+          | 特價
+          span.caret
+        th
+    tbody
+      each product in products.rows
+        tr
+          td
+            -if( promotion.id )
+              input.addSelect(type='checkbox' , checked='',value= product.id)
+            -else
+              input.addSelect(type='checkbox' ,value= product.id)
+          td
+            img.width-6(src= product.coverPhoto)
+          td= product.name
+          td= product.id
+          td 590
+          td
+            span.text-danger 413
+          td.text-right
+            a.btn.btn-link.delete-link(href='#', data-toggle='modal', data-target='#modal-delete')
+              span.glyphicon.glyphicon-remove
+  hr.dashed-line
+  .text-center
+    //
+      pagination-block
+      ==================================================
+    ul.list-inline.m-bottom-0.m-top-1
+      +pagination-simple-pager(page, totalPages)
+  // /text-center
+block js
+  script(src='/javascripts/common/pagination.js')
+  script(src="/javascripts/admin/shopDiscount.js")
