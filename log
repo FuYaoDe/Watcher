@@ -1,0 +1,1054 @@
+
+
+[33mwarn: [39mSails' built-in layout support only works with the `ejs`, `handlebars`, `ractive` view engines.
+[33mwarn: [39mYou're using `jade`.
+[33mwarn: [39mIgnoring `sails.config.views.layout`...
+Executing (default): INSERT INTO `Roles` (`id`,`authority`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'user','2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (default): INSERT INTO `Users` (`id`,`username`,`email`,`mobile`,`birthDate`,`comment`,`orderSyncToken`,`verification`,`admin`,`dateCreated`,`lastUpdated`,`privacyTermsAgree`,`RoleId`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'buyer','buyer@gmail.com','0937397377','2015-10-16 16:44:37','this is a newBuyer','11111',true,false,'2015-10-16 16:44:37','2015-10-16 16:44:37',false,1,'2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (default): INSERT INTO `Passports` (`id`,`protocol`,`password`,`UserId`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'local','buyer',1,'2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (default): INSERT INTO `Likes` (`id`,`title`,`createdAt`,`updatedAt`) VALUES (NULL,'最愛不需要麻煩的水果','2015-10-16 16:44:37','2015-10-16 16:44:37'),(NULL,'注重健康有機','2015-10-16 16:44:37','2015-10-16 16:44:37'),(NULL,'新鮮最重要','2015-10-16 16:44:37','2015-10-16 16:44:37'),(NULL,'產地直送最好','2015-10-16 16:44:37','2015-10-16 16:44:37'),(NULL,'在地合時宜的水果讚','2015-10-16 16:44:37','2015-10-16 16:44:37'),(NULL,'新鮮果汁與果醬','2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (default): INSERT INTO `ShopCodes` (`id`,`code`,`title`,`type`,`description`,`restriction`,`startDate`,`endDate`,`restrictionDate`,`sentType`,`sentContent`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'1234ABCD','滿 500 折 100','price',100,500,'1970-01-01','1970-01-01','on','all','滿 500 折 100 !!','2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (b9ebb0d1-ead7-4e5f-b2b3-141f0e68f8ec): START TRANSACTION;
+Executing (b9ebb0d1-ead7-4e5f-b2b3-141f0e68f8ec): SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+Executing (b9ebb0d1-ead7-4e5f-b2b3-141f0e68f8ec): SET autocommit = 1;
+Executing (b9ebb0d1-ead7-4e5f-b2b3-141f0e68f8ec): SELECT `id`, `authority`, `createdAt`, `updatedAt` FROM `Roles` AS `Role` WHERE `Role`.`authority` = 'user' LIMIT 1;
+Executing (b9ebb0d1-ead7-4e5f-b2b3-141f0e68f8ec): COMMIT;
+Executing (1324817f-0ab3-430f-b323-3e062a9feda6): START TRANSACTION;
+Executing (1324817f-0ab3-430f-b323-3e062a9feda6): SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+Executing (1324817f-0ab3-430f-b323-3e062a9feda6): SET autocommit = 1;
+Executing (1324817f-0ab3-430f-b323-3e062a9feda6): SELECT `id`, `authority`, `createdAt`, `updatedAt` FROM `Roles` AS `Role` WHERE `Role`.`authority` = 'admin' LIMIT 1;
+Executing (1324817f-0ab3-430f-b323-3e062a9feda6): INSERT INTO `Roles` (`id`,`authority`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'admin','2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (1324817f-0ab3-430f-b323-3e062a9feda6): COMMIT;
+Executing (cf52a5ed-28af-4377-9e86-0b391c458ea5): START TRANSACTION;
+Executing (cf52a5ed-28af-4377-9e86-0b391c458ea5): SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+Executing (cf52a5ed-28af-4377-9e86-0b391c458ea5): SET autocommit = 1;
+Executing (cf52a5ed-28af-4377-9e86-0b391c458ea5): SELECT `id`, `username`, `fullName`, `gender`, `email`, `mobile`, `birthYear`, `birthMonth`, `birthDay`, `birthDate`, `address`, `city`, `region`, `zipcode`, `comment`, `orderSyncToken`, `forgotToken`, `verification`, `admin`, `dateCreated`, `lastUpdated`, `privacyTermsAgree`, `createdAt`, `updatedAt`, `RoleId`, `ShopCodeId` FROM `Users` AS `User` WHERE `User`.`username` = 'admin' LIMIT 1;
+Executing (cf52a5ed-28af-4377-9e86-0b391c458ea5): INSERT INTO `Users` (`id`,`username`,`email`,`mobile`,`birthDate`,`address`,`city`,`region`,`zipcode`,`comment`,`verification`,`admin`,`dateCreated`,`lastUpdated`,`privacyTermsAgree`,`RoleId`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'admin','admin@gmail.com','0900000000','2015-10-16 16:44:37','admin','基隆市','仁愛區',200,'',false,false,'2015-10-16 16:44:37','2015-10-16 16:44:37',false,2,'2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (cf52a5ed-28af-4377-9e86-0b391c458ea5): COMMIT;
+Executing (958e1216-6c65-4379-baa9-3c3e80761747): START TRANSACTION;
+Executing (958e1216-6c65-4379-baa9-3c3e80761747): SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+Executing (958e1216-6c65-4379-baa9-3c3e80761747): SET autocommit = 1;
+Executing (958e1216-6c65-4379-baa9-3c3e80761747): SELECT `id`, `protocol`, `password`, `accessToken`, `provider`, `identifier`, `tokens`, `createdAt`, `updatedAt`, `UserId` FROM `Passports` AS `Passport` WHERE `Passport`.`UserId` = 2 LIMIT 1;
+Executing (958e1216-6c65-4379-baa9-3c3e80761747): INSERT INTO `Passports` (`id`,`protocol`,`password`,`UserId`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'local','admin',2,'2015-10-16 16:44:37','2015-10-16 16:44:37');
+Executing (958e1216-6c65-4379-baa9-3c3e80761747): COMMIT;
+Executing (default): SELECT `createdAt`, `updatedAt`, `UserId`, `LikeId` FROM `UserLike` AS `UserLike` WHERE `UserLike`.`UserId` = 2;
+Executing (default): INSERT INTO `UserLike` (`UserId`,`LikeId`,`createdAt`,`updatedAt`) VALUES (2,1,'2015-10-16 16:44:37','2015-10-16 16:44:37'),(2,2,'2015-10-16 16:44:37','2015-10-16 16:44:37'),(2,3,'2015-10-16 16:44:37','2015-10-16 16:44:37'),(2,4,'2015-10-16 16:44:37','2015-10-16 16:44:37'),(2,5,'2015-10-16 16:44:37','2015-10-16 16:44:37');
+  about Movie service
+Executing (default): INSERT INTO `Movies` (`id`,`name`,`description`,`time`,`detail`,`poster`,`video`,`photos`,`updatedAt`,`createdAt`) VALUES (DEFAULT,'測試電影','描述在這','2015/10/10','劇情大綱','http://gallery.photowant.com/b/gallery.cfm?action=poster&filmid=flen41618442','預告片','[\"http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0010\",\"http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0008\"]','2015-10-16 16:44:37','2015-10-16 16:44:37');
+    ✓ add Movie
+!!! 
+
+
+
+
+    
+    
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>開眼電影網--新版--</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="/assets/css/main-2.css" />
+<link rel="stylesheet" href="/assets/css/film.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+<!-- jAMES + -->
+<link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon-precomposed" href="/assets/icons/apple-touch-icon-precomposed.png" />
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.dropotron.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/skel-viewport.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="/assets/js/main.js"></script>
+<!-- jAMES + -->
+<script src="/assets/js/home.js"></script>
+<script src="/assets/js/ajax-grab.js"></script>
+
+</head>
+<body>
+<div id="page-wrapper">
+
+<!-- Header -->
+<header id="header">
+<div class="logo container">
+<p><img src="/images/logo300.gif" height=50 style="margin-right:40px;margin-left: -200px;"></p>
+<h1 id="logo">開眼電影網</h1>
+</div>
+</header>
+
+<!-- Nav -->
+  <!--  選單  -->
+<!-- Nav -->  <!--  選單開始  -->
+<nav id="nav">
+<ul>
+<li class="home"><a href="http://www.atmovies.com.tw/home/"><img src="/images/logo100.png"></a></li>
+<li class="current">
+<a href="http://www.atmovies.com.tw/home/movie_homepage.html">電 影</a>
+<ul>
+<li><a href="/movie/new/">本 周 新 片</a></li>
+<li><a href="/movie/now/">本 期 首 輪</a></li>
+<li><a href="/movie/now2/">本 期 二 輪</a></li>
+<li><a href="/movie/next/">近 期 上 映</a></li>
+<li><a href="/movie/next2/">新 片 快 報</a></li>
+<li><a href="http://app.atmovies.com.tw/movie/movie.cfm?action=boxoffice">票 房 排 行 榜</a></li>
+<li><a href="http://app.atmovies.com.tw/atmdb/atmdb.cfm"><font color=#cc0000>★</font> 資 料 館 <font color=#cc0000>★</font></a></li>
+<li><HR></li>
+<li> MORE ……… <img src="/images/arrow_right_red.gif">
+<ul>
+<li><a href="http://app.atmovies.com.tw/movie/movie.cfm?action=DVD">DVD</a></li>
+<li><a href="http://app.atmovies.com.tw/movie/movie.cfm?action=music">原聲帶</a></li>
+<li><a href="http://app.atmovies.com.tw/movie/movie.cfm?action=trailer&p=O">預告片</a></li>
+<li><a href="http://app.atmovies.com.tw/movie/movie.cfm?action=rating">全民公投</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/showtime/">戲 院</a>
+<ul>
+<li><a href="/html/ticket/"><font color=#cc0000>★</font> 網路訂票 <font color=#cc0000>★</font></a></li>
+<li><HR></li>
+<li> 北部地區 <img src="/images/arrow_right_red.gif">
+<ul>
+ <li><a href="/showtime/a01/"> 基  隆 </a></li>
+ <li><a href="/showtime/a02/"> 台  北 </a></li>
+ <li><a href="/showtime/a03/"> 桃  園 </a></li>
+ <li><a href="/showtime/a35/"> 新  竹 </a></li>
+ <li><a href="/showtime/a37/"> 苗  栗 </a></li>
+</ul>
+</li>
+<li> 中部地區 <img src="/images/arrow_right_red.gif">
+<ul>
+ <li><a href="/showtime/a04/"> 台  中 </a></li>
+ <li><a href="/showtime/a47/"> 彰  化 </a></li>
+ <li><a href="/showtime/a45/"> 雲  林 </a></li>
+ <li><a href="/showtime/a49/"> 南  投 </a></li>
+</ul>
+</li>
+<li> 南部地區 <img src="/images/arrow_right_red.gif">
+<ul>
+ <li><a href="/showtime/a05/"> 嘉  義 </a></li>
+ <li><a href="/showtime/a06/"> 台  南 </a></li>
+ <li><a href="/showtime/a07/"> 高  雄 </a></li>
+ <li><a href="/showtime/a87/"> 屏  東 </a></li>
+</ul>
+</li>
+<li> 東部/離島地區 <img src="/images/arrow_right_red.gif">
+<ul>
+ <li><a href="/showtime/a39/"> 宜  蘭 </a></li>
+ <li><a href="/showtime/a38/"> 花  蓮 </a></li>
+ <li><a href="/showtime/a89/"> 台  東 </a></li>
+ <li><a href="/showtime/a69/"> 澎  湖 </a></li>
+ <li><a href="/showtime/a68/"> 金  門 </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/home/tv/">電 視 </a>
+<ul>
+<li><a href="http://tv.atmovies.com.tw/tv/attv.cfm?action=showtime" target=_blank>目前放映</a></li>
+<li><a href="http://tv.atmovies.com.tw/tv/attv.cfm?action=todaytime" target=_blank>今日節目表</a></li>
+<li><a href="http://tv.atmovies.com.tw/tv/attv.cfm?action=channeltime" target=_blank>頻道節目表</a></li>
+<li><a href="http://tv.atmovies.com.tw/tv/attv.cfm?action=special" target=_blank>節目精選</a></li>
+<li><a href="http://tv.atmovies.com.tw/tv/attv.cfm?action=channel" target=_blank>頻道列表</a></li>
+<li><a href="http://tv.atmovies.com.tw/tv/attv.cfm?action=cable" target=_blank>有線電視</a></li>
+<li><a href="http://tv.atmovies.com.tw/tv/attv.cfm?action=search" target=_blank>節目搜尋</a></li>
+</ul>
+</li>
+<li><a href="http://news.atmovies.com.tw/news/home/">新 聞</a></li>
+<li><a href="http://eweekly.atmovies.com.tw">E週報 </a></li>
+<!--
+<li><a href="right-sidebar.html">藏經閣</a>
+<ul>
+<li><a href="left-sidebar.html">新 聞</a></li>
+<li><a href="right-sidebar.html">影 評</a></li>
+<li><a href="right-sidebar.html">專 題</a></li>
+<li><a href="right-sidebar.html">專 欄</a></li>
+<li><a href="right-sidebar.html">E週報 </a></li>
+</ul>
+</li>-->
+<li><a href="#">MORE</a>
+<ul>
+<li><a href="http://app.atmovies.com.tw/activity/activity.cfm">活 動</a></li>
+<li><a href="http://bbs.atmovies.com.tw/space/spacehome.cfm">bbs</a></li>
+<li><a href="http://space.atmovies.com.tw/space/spacehome.cfm">分享</a></li>
+<li><a href="http://gallery.photowant.com/B/">圖王</a></li>
+</ul>
+</li>
+<li><a href="http://www.hamovie.com.tw/hamoviehome.html"> 會 員 </a></li>
+<li class="search-image"><img src="/images/search.png" border=0 onclick="treemenu('searchID78kldtfbnsfo');"></li>
+</ul>
+
+<!--////////search DIV////////-->
+<div class="center">
+<div class="searchFormBlock" id="searchID78kldtfbnsfo" style="display: none;">
+<form id="searchform" name=all_search action="http://search.atmovies.com.tw/search/search.cfm" method=post onsubmit="return checkinput();" autocomplete="off">
+                <input type=hidden name=action value="home">
+                <input type=hidden name=fr value="atmovies-homepage">
+                <input type=hidden name=enc value="UTF-8">
+<input type="hidden" name="type" value="all">
+<input type="text" name="search_term" id="search-field" autocomplete="off" class="form-input" placeholder=" 搜尋電影&amp;明星&amp;DVD ">
+<input type="submit" name="sa" value="Search" class="form-submit">
+</form>
+</div>
+</div>
+<!--////////search DIV END////////-->
+
+</nav>
+<!--  選單結束  -->  
+
+<!-- Main -->
+<div id="main-wrapper">
+<div id="main" class="container">
+
+<!--////  內容區塊   ////-->
+<div class="row">
+<!--////  左邊內文 Content   ////-->
+<div class="9u 12u(mobile) important(mobile)">
+<div class="content content-left">
+
+
+
+ 
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+                     
+                     
+
+
+
+
+
+
+
+
+<script language="JavaScript">
+<!--
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+function go_out(URL)
+{
+  if ( confirm("您要前往其他網站?") )
+  window.open("http://"+URL);
+}
+//-->
+</script>
+
+<script language="javascript">window.document.title="獵巫行動：大滅絕 The Last Witch Hunter -- @movies【開眼電影】 @movies http://www.atmovies.com.tw";</script>
+
+<div id="section_nav">
+<div class="s_nav">
+ <a href="/">開眼</a> ﹥<a href="/movie/">電影</a> ﹥<a href="/movie/next/">近期上映</a>
+</div>
+</div>
+
+
+
+<div class="filmTitle">
+獵巫行動：大滅絕 The Last Witch Hunter
+<img src="http://images.atmovies.com.tw/images/cer_P.gif" vspace=5 align=absmiddle>
+
+   </div> 
+   <!--filmTitle end -->
+
+  <div class="filmCollection" style="display:none;">
+  <P>我要評分：</p>  
+  <div class="filmRating">
+<div id="ratingBlock">
+<ul>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s10','ratingBlock')" class="s10" title="一顆星">1.0</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s15','ratingBlock')" class="s15" title="一顆半星">1.5</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s20','ratingBlock')" class="s20" title="二顆星">2.0</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s25','ratingBlock')" class="s25" title="二顆半星">2.5</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s30','ratingBlock')" class="s30" title="三顆星">3.0</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s35','ratingBlock')" class="s35" title="三顆半星">3.5</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s40','ratingBlock')" class="s40" title="四顆星">4.0</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s45','ratingBlock')" class="s45" title="四顆半星">4.5</li>
+  <li onClick="grabFile('/film/film_rating.cfm?filmid=flen41618442&action=s50','ratingBlock')" class="s50" title="五顆星">5.0</li>
+</ul>
+</div><!-- ratingBlock end -->
+  </div>
+  <p>加入收藏：</p>
+  <div class="filmFavorite">
+  <div id="favoriteBlock">
+  <li onClick="grabFile('/film/film_favorite.cfm?filmid=flen41618442&action=add','favoriteBlock')" title="加入收藏">+</li>
+  </div>
+  </div>
+  <p>推薦影片：LIKE</p>
+  <div class="filmLike">
+  <div id="likeBlock">
+  <li onClick="grabFile('/film/film_like.cfm?filmid=flen41618442&action=like','likeBlock')" title="推薦影片">+</li>
+  </div>
+  </div>
+  
+  <p>發表短評</p>
+  
+  </div>
+
+   <div class="movie_poster">
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=poster&filmid=flen41618442" target=_blank  class="image filmListPoster"> 
+<img src="
+
+
+
+
+
+
+
+
+
+
+http://www.photowant.com/photo101/flen41618442/pl_flen41618442_0014.jpg
+
+
+" alt="獵巫行動：大滅絕" /></a>
+<div class="runtime">
+
+上映日期：2015/10/21&nbsp; 
+
+</div>
+
+
+
+
+
+
+
+
+繼《玩命關頭7》，馮迪索再度自製自演的新片，馮迪索這次改變他成名後的招牌光頭造型，以長編髮及大片落腮鬍造型亮相令人吃驚，一個神勇的野蠻戰士再現！
+
+
+
+
+
+
+
+
+   </div>
+   <!-- movie_poster end -->
+      
+
+
+
+
+
+
+
+<DIV class="video_view">
+
+<iframe width="750" height="360" src="https://www.youtube.com/embed/0Lp8M-8EDG0" frameborder="0" allowfullscreen></iframe>
+
+<div id="moreTrailer" style="cursor:pointer;">
+<P> <img src="http://images.atmovies.com.tw/images/arrow_right.gif" align=absmiddle border=0 hspace=5>
+<a  onClick="grabFile('/film/film_moreTrailer.cfm?filmid=flen41618442','moreTrailer');">更多本片預告</a>
+</div>
+
+
+</DIV>
+
+
+   
+
+
+
+<div style="width:90%;">
+
+
+   <!-- Story info start -->
+   <div class="sub_t"><img src="http://images.atmovies.com.tw/images/movie/ion_t02.gif" />劇情簡介</div>
+<div class="sub_content">
+             
+              
+                   
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+繼《<I><A HREF=http://app.atmovies.com.tw/movie/movie.cfm?action=filmdata&film_id=ffen52820852 TARGET=_self>玩命關頭7</A></I>》，馮迪索再度自製自演的新片，其他演員包括《冰與火之歌》蘿絲萊斯莉、《魔戒三部曲》伊利亞伍德及《<I><A HREF=http://app.atmovies.com.tw/movie/movie.cfm?action=filmdata&film_id=fden70468569 TARGET=_self>黑暗騎士</A></I>》米高肯恩等。 <BR> <BR>身為世上最後一個女巫獵人，寇特背負著世代傳承對抗女巫的命運。在現代的紐約市哩，女巫們蠢蠢欲動，即將對人民發動一場大規模的瘟疫攻擊，肩負消滅邪惡使命的寇特明白這將是他最後一戰，然而面對傾巢而出的女巫所擁有的壓倒性力量，他是否能找到扭轉戰局的關鍵，成功解救全紐約市的人類呢？ <BR> <BR>馮迪索這次改變他成名後的招牌光頭造型，以長編髮及大片落腮鬍造型亮相令人吃驚！原來是新片中馮迪索飾演的女巫獵人永有長生不死的能力，電影橫跨了八個世紀，為了區別古代與現在兩個時空，劇組特別設計了特殊的造型讓長久以來頂著光頭的馮迪索首度長了頭髮，這次的造型設計帶有點維京海盜的味道，兩側削短、粗獷的髮辮再加上大鬍子，儼然是一個神勇的野蠻戰士再現。                       <P>
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+    
+
+
+
+
+
+
+
+
+
+
+   
+
+    
+
+
+
+
+
+
+
+
+
+
+   
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+              
+</div>
+ </div>
+             
+    <!-- Story info end -->
+
+<div style="width:95%;">
+     
+  
+
+
+<div style="float:left;margin:5px;">
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0010" alt="劇～照" target="_blank">
+<img src="http://l10l010l3322l1.photos.atmovies.com.tw:8080/film/2015/L/flen41618442/photo/fs_FLEN41618442_0010.jpg" /></a>
+</div>
+
+
+<div style="float:left;margin:5px;">
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0008" alt="劇～照" target="_blank">
+<img src="http://l10l010l3322l1.photos.atmovies.com.tw:8080/film/2015/L/flen41618442/photo/fs_FLEN41618442_0008.jpg" /></a>
+</div>
+
+
+<div style="float:left;margin:5px;">
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0012" alt="劇～照" target="_blank">
+<img src="http://l10l010l3322l1.photos.atmovies.com.tw:8080/film/2015/L/flen41618442/photo/fs_FLEN41618442_0012.jpg" /></a>
+</div>
+
+
+<div style="float:left;margin:5px;">
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0014" alt="劇～照" target="_blank">
+<img src="http://l10l010l3322l1.photos.atmovies.com.tw:8080/film/2015/L/flen41618442/photo/fs_FLEN41618442_0014.jpg" /></a>
+</div>
+
+
+<div style="float:left;margin:5px;">
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0006" alt="劇～照" target="_blank">
+<img src="http://l10l010l3322l1.photos.atmovies.com.tw:8080/film/2015/L/flen41618442/photo/fs_FLEN41618442_0006.jpg" /></a>
+</div>
+
+
+<div style="float:left;margin:5px;">
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=still&filmid=flen41618442&pid=FA2015LS-FLEN41618442_0002" alt="劇～照" target="_blank">
+<img src="http://l10l010l3322l1.photos.atmovies.com.tw:8080/film/2015/L/flen41618442/photo/fs_FLEN41618442_0002.jpg" /></a>
+</div>
+
+<p align=center clear=left>
+
+<a href="http://gallery.photowant.com/b/gallery.cfm?action=STILL&filmid=flen41618442" alt="更多劇照" target=_blank" class="button">更多劇照</a>
+
+
+</div><!-- pic end -->
+
+ 
+
+
+<div style="width:45%;float:left;border: dashed 1px #966;padding:10px;height:400px;">
+
+
+  <ul>
+  
+<li><B>導演：</B>
+
+  
+  <a href="/star/star.cfm?action=stardata&starid=sBE0073515">
+  布雷克艾斯納</a>
+
+
+  
+<li><B>編劇：</B>
+
+  
+  <a href="/star/star.cfm?action=stardata&starid=sNZ0092669">
+  梅麗莎沃雷克</a>
+
+
+  
+<li><B>演員：</B>
+
+  
+  <a href="/star/star.cfm?action=stardata&starid=sVD3002514">
+  馮迪索</a>
+
+
+  <li style="margin-left:3.5em;">
+  <a href="/star/star.cfm?action=stardata&starid=sEW5004046">
+  伊利亞伍德</a>
+
+
+  <li style="margin-left:3.5em;">
+  <a href="/star/star.cfm?action=stardata&starid=sMC4002317">
+  米高肯恩</a>
+
+
+  <li style="margin-left:3.5em;">
+  <a href="/star/star.cfm?action=stardata&starid=SDIFRW1589">
+  蘿絲萊斯莉</a>
+
+
+  
+  <ul>
+<p align=center>
+
+<a href="http://app.atmovies.com.tw/movie/movie.cfm?action=cast&film_id=flen41618442" alt="更多" target=_blank" class="button">more</a>
+
+
+</div>
+
+<div style="width:45%;float:left;border: dashed 1px #966;margin:0 10px;padding:10px;height:400px;">
+
+<UL>
+
+
+
+    
+    
+<LI><a  href="http://us.imdb.com/Title?1618442" target=_blank>IMDb</a>
+
+  <LI><b>影片年份：</b>2015
+  <LI><b>出&nbsp;&nbsp;品&nbsp;&nbsp;國：</b>USA
+  <LI><b>出　　品：</b>Aperture Entertainment, Summit Entertainment
+  <LI><b>發&nbsp;&nbsp;行&nbsp;&nbsp;商：</b>威視
+  <LI><b>語　　言：</b>English
+  <LI><b>色　　彩：</b>color
+  <LI><b>音　　效：</b>
+
+</UL>
+</div>
+<BR clear="both">
+<div class="updateTime">
+更新時間：2015/10/17 00:33
+</div>
+
+
+
+
+
+</div><!--  class="content content-left" END -->
+</div><!--  class="9u 12u(mobile) important(mobile)" END -->
+<!--////  左邊內文 Content END  ////-->
+<!--////  右邊 Side BAR   ////-->
+<div class="3u 12u(mobile)">
+<div class="sidebar">
+<!--/////////******** Quick Select  **********//////////-->
+<DIV id="quickSelect"> 
+
+
+
+
+
+ 
+
+<!-- 快速查詢 quick_search start -->
+<div class="quickSelect icon"><img src="/images/quickSelect01.gif" /></div>
+
+&nbsp;◆近期上映影片
+<form nmae="filmSelect" method="post">
+<select size=12 name="filmselect" onChange="window.open(this.options[this.selectedIndex].value,'_self')">
+<option> ▉ 請選擇影片 ◥◤</option>
+
+<option value="/movie/flen41618442/">獵巫行動：大滅絕</option>
+
+<option value="/movie/flfr31754656/">小王子</option>
+
+<option value="/movie/fben31355683/">黑勢力</option>
+
+<option value="/movie/fsau42325977/">陌生之地</option>
+
+<option value="/movie/fpch63554477/">234說愛你</option>
+
+<option value="/movie/flen93558992/">繁華世紀：第一女記者</option>
+
+<option value="/movie/ften54163020/">萬聖夜怪譚</option>
+
+<option value="/movie/ftch49665577/">海上情書</option>
+
+<option value="/movie/fmen73882000/">青春冒險王</option>
+
+<option value="/movie/A12015102301/">2015酷兒影展</option>
+
+<option value="/movie/A12015102302/">2015高雄電影節</option>
+
+<option value="/movie/fsus51398426/">衝出康普頓</option>
+
+<option value="/movie/fsen43397884/">怒火邊界</option>
+
+<option value="/movie/faen61178665/">別跟山過不去</option>
+
+<option value="/movie/faus92503944/">天菜大廚</option>
+
+<option value="/movie/fefr23090634/">巴黎電幻世代</option>
+
+<option value="/movie/fjen53289712/">不一樣的婚禮又怎樣</option>
+
+<option value="/movie/fwtw73236285/">愛情算不算</option>
+
+<option value="/movie/fmes43253930/">神秘沼澤</option>
+
+<option value="/movie/fcjp43560464/">天之茶助</option>
+
+<option value="/movie/fben42379713/">007：惡魔四伏</option>
+
+<option value="/movie/A12015110501/">2015台北金馬影展</option>
+
+<option value="/movie/fazh49460875/">碟仙碟仙</option>
+
+<option value="/movie/fyjp74982154/">劇場版 飆速宅男</option>
+
+<option value="/movie/fssp53417756/">凌刑密密縫</option>
+
+<option value="/movie/fwen03846402/">和食之神：美味交饗曲</option>
+
+<option value="/movie/fsen43165612/">愛睡在一起</option>
+
+<option value="/movie/fljp71229068/">仁醫，迎風而立</option>
+
+<option value="/movie/fmde33469960/">馬康多男孩</option>
+
+<option value="/movie/fccn21994053/">心迷宮</option>
+
+<option value="/movie/fres23319920/">邪靈刑事錄</option>
+
+<option value="/movie/fajp94029559/">劇場版：蒼藍鋼鐵戰艦</option>
+
+<option value="/movie/fluk43569230/">金牌黑幫</option>
+
+<option value="/movie/fsen31727776/">殭屍教戰守則</option>
+
+<option value="/movie/fren33687398/">絕不妥協</option>
+
+<option value="/movie/fltw44672751/">剩者為王</option>
+
+<option value="/movie/ffjp44195368/">墊底辣妹</option>
+
+<option value="/movie/fbve43867606/">夏戀之外的故事</option>
+
+<option value="/movie/fmtw22812934/">菜鳥</option>
+
+<option value="/movie/fttw62865535/">他媽媽的藏寶圖</option>
+
+<option value="/movie/fbus53276924/">關鍵救援：巴士657</option>
+
+<option value="/movie/fken83263614/">久美子的奇異旅程</option>
+
+<option value="/movie/fphk44417522/">踏血尋梅</option>
+
+<option value="/movie/fmus42893490/">梅格漢的心靈鑰匙</option>
+
+<option value="/movie/fmen52334733/">慾見包法利夫人</option>
+
+<option value="/movie/fhen91951266/">飢餓遊戲：自由幻夢 終結戰</option>
+
+<option value="/movie/fien43715320/">愛情失控點</option>
+
+<option value="/movie/fpjp94503906/">光環的超魔神胡霸</option>
+
+<option value="/movie/fftw46781277/">老鷹想飛</option>
+
+<option value="/movie/feus43289728/">禁愛世界</option>
+
+<option value="/movie/fkbe62917388/">綁架海尼根</option>
+
+<option value="/movie/feen51702429/">十日性愛死</option>
+
+<option value="/movie/ffen21976009/">怪物</option>
+
+<option value="/movie/foen01018765/">危機女王</option>
+
+<option value="/movie/fdjp94453498/">D坂殺人事件</option>
+
+<option value="/movie/fgjp23846972/">蚱蜢</option>
+
+<option value="/movie/ften03824458/">夜晚還年輕</option>
+
+<option value="/movie/fttw56869493/">紅衣小女孩</option>
+
+<option value="/movie/fmch55234449/">消失的兇手</option>
+
+<option value="/movie/fien81390411/">白鯨傳奇：怒海之心</option>
+
+<option value="/movie/fsch57422650/">消失的愛人</option>
+
+<option value="/movie/fpen43862750/">完美男人</option>
+
+<option value="/movie/fren43623726/">搖滾女王</option>
+
+<option value="/movie/frca43704050/">我記得</option>
+
+<option value="/movie/fken13850590/">聖誕妖怪：坎卜斯</option>
+
+<option value="/movie/fbjp54272866/">怪物的孩子</option>
+
+<option value="/movie/fphk59075345/">陀地驅魔人</option>
+
+<option value="/movie/ften02006295/">33:重生奇蹟</option>
+
+<option value="/movie/fssp33477752/">屠屍館</option>
+
+<option value="/movie/fmfr04428814/">衡量一個人</option>
+
+<option value="/movie/fgch44814589/">追婚日記</option>
+
+<option value="/movie/fpen21596345/">出棋制勝</option>
+
+<option value="/movie/ftch48176829/">我們的那時‧此刻</option>
+
+<option value="/movie/fbus53302706/">天聲男孩</option>
+
+<option value="/movie/fjus03614530/">芙蓉仙子</option>
+
+<option value="/movie/fsen52488496/">星際大戰七部曲</option>
+
+<option value="/movie/fien23062096/">地獄</option>
+
+<option value="/movie/fgcn74119143/">尋龍訣</option>
+
+<option value="/movie/feen53416744/">‪寂寞公路</option>
+
+<option value="/movie/fiuk93083008/">是誰在造神？</option>
+
+<option value="/movie/fsen63409440/">意外製造公司</option>
+
+                </select>
+</form>
+
+
+<!-- 快速查詢 quick_search end  -->
+</DIV>
+<!--/////////******** Google廣告  **********//////////-->
+<DIV id="googleAD"><!--/////////******** Google廣告  **********//////////-->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Responsive AD -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6580532459519002"
+     data-ad-slot="9308357246"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></DIV>
+<!--/////////******** ScupioAD廣告  **********//////////-->
+<DIV id="googleAD"><ins class="scupioadslot"
+style="display:inline-block;width:300px;height:250px;"
+data-sca-pub="lQoYOwwoTCVQ"
+data-sca-web="225"
+data-sca-category="19"
+data-sca-cid="11016"
+data-sca-width="300px"
+data-sca-height="250px"
+data-sca-background-color="#ffffff"
+data-sca-title-color="#0000FF"
+data-sca-title-font-family="Microsoft JhengHei"
+data-sca-description-color="#333333"
+data-sca-description-font-family="Microsoft JhengHei"
+data-sca-border-color="#cccccc"
+></ins><script async src="//img.scupio.com/js/ad.js"></script></DIV>
+<!--**------__Archives [include]__---------**-->
+</div>
+</div>
+<!--////  右邊 Side BAR END  ////-->
+</div><!-- div class="row" END -->
+<!--////  內容區塊 END   ////-->
+
+
+
+
+</div>
+</div><!-- div id="main-wrapper" END -->
+<!-- **Main END** -->
+
+<!-- Footer -->
+<!--**---------__Footer [include]__---------**-->
+<!-- Footer -->
+<footer id="footer" class="container">
+<!-- Copyright -->
+<div id="copyright">
+<ul class="menu">
+<li>&copy; @movies All rights reserved 開眼電影網版權所有</li>
+<li><a href="http://app.atmovies.com.tw/service/service.cfm?action=contact">聯絡我們</a></li>
+<li><a href="http://app.atmovies.com.tw/service/service.cfm?action=about&page=1">關於開眼</a></li> 
+<li><a href="http://app.atmovies.com.tw/service/service.cfm?action=about&page=4">服務中心</a></li>
+<li><a href="http://www.hamovie.com.tw/bin/memberservice/memberservice.cfm">會員服務</a></li>
+</ul>
+</div>
+</footer>
+
+
+</div><!--  div id="page-wrapper" END  -->
+</body>
+</html>
+!!! 
+獵巫行動：大滅絕 The Last Witch Hunter
+
+
+   
+[TypeError: Cannot read property 'should' of undefined]
+    1) test crawl
+
+
+  1 passing (5s)
+  1 failing
+
+  1) about Movie service test crawl:
+     TypeError: Cannot read property 'should' of undefined
+      at Object.callee$1$0$ (test/unit/services/MovieService.spec.js:41:17)
+
+
+
