@@ -18,44 +18,39 @@ module.exports = {
       //url分析
       let crawlHtml = await request.get(url);
       // console.log("!!!",crawlHtml.text.replace(/\t/g, ''));
-      let $ = cheerio.load(crawlHtml.text.replace(/\t/g, '').replace(/\r/g, '').replace(/\n/g, ''));
+      let $ = cheerio.load(crawlHtml.text);
       let movie = {};
-      movie.name = $(".filmTitle").text();
-      // time
-      movie.time = $(".runtime").text();
-      if(movie.time){
-        let getTime = /([0-9]*\/[0-9]*\/[0-9]*)/g;
-        let match = getTime.exec(movie.time);
-        movie.time = match[1];
-      }
+      movie.name = $("div.text.bulletin h4").text()+' '+ $("div.text.bulletin h5").text();
+      movie.time = $("div.text.bulletin .dta").text();
       movie.url = url;
-      movie.name = $(".filmTitle").text();
-      movie.detail = $(".sub_content").text().replace(/^[ ]*/g, '').replace(/[ ]*$/g, '');
-      movie.poster = $(".movie_poster a img").attr("src");
-      movie.video = $(".video_view iframe").attr("src");
-      movie.description = $(".movie_poster").text();
-
-      let imdbDiv = $("div div div div ul").get(3);
-      imdbDiv.children.forEach(function(elem, i) {
-        if(elem.children){
-          elem.children.forEach(function(elem, j) {
-            if(elem.attribs){
-              if(elem.attribs.href){
-                if(elem.children[0].data == 'IMDb'){
-                  movie.imdbUrl = elem.attribs.href;
-                }
-              }
-            }
-          });
-        }
-      });
+      movie.detail = $("div.text.full").text();
+      movie.poster = $(".border img").attr("src");
 
       let photos = [];
-      let photoDom = $("div div a img");
-      for(var i = 1 ;i < photoDom.get().length ; i++){
-        photos.push(photoDom.get(i).attribs.src);
-      }
+      let photoDom = $("#albums li");
+      photoDom.each(function(i, elem) {
+        photos.push($(this).children().children().attr("src"));
+      });
       movie.photos = photos
+
+      // movie.video = $(".video_view iframe").attr("src");
+      // movie.description = $(".movie_poster").text();
+
+      // let imdbDiv = $("div div div div ul").get(3);
+      // imdbDiv.children.forEach(function(elem, i) {
+      //   if(elem.children){
+      //     elem.children.forEach(function(elem, j) {
+      //       if(elem.attribs){
+      //         if(elem.attribs.href){
+      //           if(elem.children[0].data == 'IMDb'){
+      //             movie.imdbUrl = elem.attribs.href;
+      //           }
+      //         }
+      //       }
+      //     });
+      //   }
+      // });
+      
       console.log("=== movie ===",movie);
       return movie
 
@@ -79,7 +74,7 @@ module.exports = {
       console.log('=== movies ===',movies);
       let movieList = await* movies.map(function(url){
          let show = db.MovieUrl.findOrCreate({
-           where: {url}
+           where: {url},
            defaults: {url}
          });
          return show;
