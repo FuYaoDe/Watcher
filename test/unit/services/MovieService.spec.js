@@ -58,7 +58,8 @@ describe.only("about Movie service", () => {
     try {
       var url = 'http://www.atmovies.com.tw/movie/next/';
       let movieUrls = await MovieService.root(url);
-      movieUrls.should.be.Array;
+      movieUrls.movies.should.be.Array;
+      movieUrls.root.should.be.String;
       done();
     } catch (e) {
       console.log(e);

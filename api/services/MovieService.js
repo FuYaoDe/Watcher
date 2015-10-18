@@ -74,16 +74,18 @@ module.exports = {
       movieUrlDiv.each(function(i, elem) {
         movies.push($(this).children().attr("href"));
       });
+      let next = "";
 
       console.log('=== movies ===',movies);
-      let movieList = await* movies.map(function(item){
-        console.log(item);
-         let show = db.MovieUrl.create({url: item});
+      let movieList = await* movies.map(function(url){
+         let show = db.MovieUrl.findOrCreate({
+           where: {url}
+           defaults: {url}
+         });
          return show;
       });
-      console.log('=== movies ===',movieList);
 
-      return movies;
+      return {movies,next};
     } catch (e) {
       throw e;
     }
