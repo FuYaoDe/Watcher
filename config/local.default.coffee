@@ -5,7 +5,7 @@ module.exports = {
   initData: ''
   domain: 'http://localhost:1337'
   cookieVersion:'0.1'
-  paserRootDomain: 'http://www.atmovies.com.tw/'
+  paserRootDomain: 'https://tw.movies.yahoo.com/movie_thisweek.html'
   # mail: {
   #   type: 'ses'
   #   active: false

@@ -5,5 +5,8 @@ module.exports = (sequelize, DataTypes) ->
     isCrawl:
       type: DataTypes.BOOLEAN
       defaultValue: false
+    tryTime:
+      type: DataTypes.INTEGER
+      defaultValue: 0
   })
   return MovieUrl

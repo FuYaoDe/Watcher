@@ -13,15 +13,18 @@ module.exports = {
     }
   },
 
-  crawl: async(url) => {
+  crawl: async(id) => {
     try {
       //url分析
-      let crawlHtml = await request.get(url);
+      let findUrl = await db.MovieUrl.findById(id);
+      let crawlHtml = await request.get(findUrl.url);
       let $ = cheerio.load(crawlHtml.text);
       let movie = {};
-      movie.name = $("div.text.bulletin h4").text()+' '+ $("div.text.bulletin h5").text();
-      movie.time = $("div.text.bulletin .dta").text();
-      movie.url = url;
+      movie.MovieUrlId = id;
+      movie.zhName = $("div.text.bulletin h4").text();
+      movie.enName = $("div.text.bulletin h5").text();
+      movie.fullName = movie.zhName+' '+ movie.enName;
+      movie.time = $("div.text.bulletin p span.dta").first().text();
       movie.detail = $("div.text.full").text();
       movie.poster = $(".border img").attr("src");
 
@@ -66,10 +69,8 @@ module.exports = {
       let movieUrlDiv = $('.clearfix.row .row-container .item .text h4 a');
 
       movieUrlDiv.each(function(i, elem) {
-        console.log($(this));
         movies.push($(this).attr("href"));
       });
-      let next = "";
 
       console.log('=== movies ===',movies);
       let movieList = await* movies.map(function(url){
@@ -80,60 +81,32 @@ module.exports = {
          return show;
       });
 
-      return {movies,next};
+      return movies;
     } catch (e) {
       throw e;
     }
   },
 
-  checkCode : async (code) => {
+  findNotCrawl: async() => {
     try {
-      let result = await db.ShopCode.findOne({
+      let notCrawlMovies = await db.MovieUrl.findAll({
         where:{
-          code: code
+          isCrawl: false
         }
       });
-      return result;
-    } catch (e) {
-      throw e;
-    }
-  },
 
-  use: async ({code, price}) => {
-    try {
-      let result = await db.ShopCode.findOne({
-        where:{
-          code: code,
-          $or:[{
-            restrictionDate: 'on'
-          },{
-            startDate:{
-              $lte: moment(new Date()).format('YYYY/MM/DD')
-            },
-            endDate:{
-              $gte: moment(new Date()).format('YYYY/MM/DD')
-            },
-          }],
-          restriction:{
-            $lte: price
-          }
-        }
+      await* notCrawlMovies.map(async (movie) => {
+        let movieInfo = await MovieService.crawl(movie.id);
+        let save = await MovieService.add(movieInfo);
+        movie.isCrawl = true;
+        movie.tryTime += 1;
+        await movie.save();
+        return movie;
       });
-      let discountAmount;
-      if(result){
-        let originPrice = price;
-        if(result.type == 'price')
-          price -= result.description;
-        else
-          price *= (result.description*0.01);
-        discountAmount = originPrice - price;
-      }
-      else{
-        throw new Error("請再次確認折扣碼活動時間、活動金額");
-      }
-      return {code, price, discountAmount};
+
+      return;
     } catch (e) {
-      throw e;
+      throw e
     }
-  },
+  }
 }
