@@ -17,7 +17,6 @@ module.exports = {
     try {
       //url分析
       let crawlHtml = await request.get(url);
-      // console.log("!!!",crawlHtml.text.replace(/\t/g, ''));
       let $ = cheerio.load(crawlHtml.text);
       let movie = {};
       movie.name = $("div.text.bulletin h4").text()+' '+ $("div.text.bulletin h5").text();
@@ -50,7 +49,7 @@ module.exports = {
       //     });
       //   }
       // });
-      
+
       console.log("=== movie ===",movie);
       return movie
 
@@ -62,12 +61,13 @@ module.exports = {
   root: async(url) => {
     try {
       let crawlHtml = await request.get(url);
-      let $ = cheerio.load(crawlHtml.text.replace(/\t/g, '').replace(/\r/g, '').replace(/\n/g, ''));
+      let $ = cheerio.load(crawlHtml.text);
       let movies = [];
-      let movieUrlDiv = $('.filmTitle');
+      let movieUrlDiv = $('.clearfix.row .row-container .item .text h4 a');
 
       movieUrlDiv.each(function(i, elem) {
-        movies.push($(this).children().attr("href"));
+        console.log($(this));
+        movies.push($(this).attr("href"));
       });
       let next = "";
 
