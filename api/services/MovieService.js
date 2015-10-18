@@ -64,6 +64,31 @@ module.exports = {
     }
   },
 
+  root: async(url) => {
+    try {
+      let crawlHtml = await request.get(url);
+      let $ = cheerio.load(crawlHtml.text.replace(/\t/g, '').replace(/\r/g, '').replace(/\n/g, ''));
+      let movies = [];
+      let movieUrlDiv = $('.filmTitle');
+
+      movieUrlDiv.each(function(i, elem) {
+        movies.push($(this).children().attr("href"));
+      });
+
+      console.log('=== movies ===',movies);
+      let movieList = await* movies.map(function(item){
+        console.log(item);
+         let show = db.MovieUrl.create({url: item});
+         return show;
+      });
+      console.log('=== movies ===',movieList);
+
+      return movies;
+    } catch (e) {
+      throw e;
+    }
+  },
+
   checkCode : async (code) => {
     try {
       let result = await db.ShopCode.findOne({

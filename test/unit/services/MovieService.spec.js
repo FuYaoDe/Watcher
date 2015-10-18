@@ -53,6 +53,18 @@ describe.only("about Movie service", () => {
     }
 
   });
+
+  it('test get movie root', async(done) => {
+    try {
+      var url = 'http://www.atmovies.com.tw/movie/next/';
+      let movieUrls = await MovieService.root(url);
+      movieUrls.should.be.Array;
+      done();
+    } catch (e) {
+      console.log(e);
+      done(e);
+    }
+  });
   //
   // it('use ShopCode', async (done) => {
   //   try {
